@@ -6,6 +6,9 @@ use Application\Mappers\Timeline as TimelineMapper;
 
 class Timeline
 {
+	/**
+	 * TODO No me reconoce el TimelineMapper
+	 */
     public function get($id=null)
     {
         if(!$id)
@@ -13,7 +16,7 @@ class Timeline
             $mapper = new TimelineMapper();
             $data = $mapper->fetchAllTimeline();
             return $data;
-        }
+        }        
         else
             $this->getOne($id);
         
@@ -22,24 +25,27 @@ class Timeline
     
     private function getOne($id)
     {
-        
+        $mapper = new TimelineMapper();
     }
     
     public function post($data)
     {
-        FILA 1
+    	$mapper = new TimelineMapper();
+    	//FILA 1
         die("POST Method not implemented");
     }
     
     public function patch()
     {
-        FILA 2
+    	$mapper = new TimelineMapper();
+        //FILA 2
         die("PATCH Method not implemented");
     }
         
     public function delete($id)
     {
-        FILA 3
+    	$mapper = new TimelineMapper();
+    	//FILA 3
         die("DELETE Method not implemented");
     }
     

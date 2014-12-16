@@ -35,7 +35,7 @@ class Users
      * 
      * @return array de users
      */
-    public function fetchAllUsers()
+    public function fetchAllTimeline()
     {
         switch($this->adapterName){
            
@@ -73,7 +73,7 @@ class Users
         }
     }
     
-    public function fetchUser()
+    public function fetchTimeline()
     {
         switch($this->adapterName){
             case'\Core\Adapters\Mysql':
@@ -89,7 +89,7 @@ class Users
     /**
      * @param array $data
      */
-    public function insertUser($data)
+    public function insertTimeline($data)
     {
     	switch($this->adapterName){
     		case'\Core\Adapters\Mysql':
