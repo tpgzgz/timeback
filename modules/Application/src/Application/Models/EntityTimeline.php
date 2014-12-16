@@ -77,19 +77,18 @@ class EntityTimeline implements HydrateInterface
 
     public function extract()
     {
-        $user = array(
-            'id' => $this->id,
-            'name' => $this->name,
-            'lastname' => $this->lastname,
-            'email' => $this->email,
-            'password' => $this->password,
-            'description' => $this->description,
-            'photo' => $this->photo,
-            'gender' => $this->gender,
-            'city' => $this->city,
-            'pets' => $this->pets,
-            'languages' => $this->languages
+        $timeline = array(
+            'idTimeline' => $this->id,
+            'idTag' => $this->name,
+            'startDate' => $this->lastname,
+            'endDate' => $this->email,
+            'headline' => $this->password,
+            'text' => $this->description,
+            'media' => $this->photo,
+            'mediaCredit' => $this->gender,
+            'mediaCaption' => $this->city,
+            'type' => $this->pets
         );
-        return $user;
+        return $timeline;
     }
 }
