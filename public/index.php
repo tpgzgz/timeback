@@ -8,6 +8,7 @@ if(isset($_SERVER['APPLICATION_ENV']))
         ini_set('display_errors', 0);
     
 \Core\Application\Application::setConfig(__DIR__.'/../configs/global.php');
+\Core\Application\Application::setRequest();
 \Core\Application\Application::bootstrap();
 \Core\Application\Application::dispatch();
 

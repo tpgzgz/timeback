@@ -2,6 +2,8 @@
 namespace Application\controllers;
 use Application\Mappers\Users as UserMapper;
 
+use Application\Services;
+
 include_once '../modules/Core/src/Forms/models/validateForm.php';
 include_once '../modules/Core/src/Forms/models/filterForm.php';
 include_once '../modules/Core/src/Forms/models/renderForm.php';
@@ -26,7 +28,23 @@ $validActions = array ('insert', 'update', 'delete', 'select');
 class Users
 {
     
-    public $layout = 'dashboard.phtml';
+    public $layout = null;
+    
+    
+    public function index()
+    {
+        $service = new Services\Users();
+        $data = $service->{strtolower($_SERVER['REQUEST_METHOD'])}();
+        
+//         echo "<pre>Data: ";
+//         print_r($data);
+//         echo "<pre>";
+//         echo "kaka";
+//         die;
+        echo json_encode($data);
+        
+    }
+    
     
     public function insert()
     {
@@ -108,10 +126,13 @@ class Users
         $mapper = new UserMapper();
         $users = $mapper->fetchAllUsers();
         
-        echo "<pre>";
-        print_r($users);
-        echo"</pre>";
+        echo $_SERVER['REQUEST_METHOD'];
         
+        
+//         echo "<pre>";
+//         print_r($users);
+//         echo"</pre>";
+        die;
         include ("../modules/Application/src/Application/views/users/select.phtml");
     } 
 }
