@@ -80,6 +80,9 @@ class Users
                 $adapter = new $this->adapterName();
                 $adapter->setTable("timeline");
                 $timeline = $adapter->fetch(array('idTimeline'=> $this->id));
+                /**
+                 * TODO Falta el idTag con el Title del Media
+                 */
                 $userHidrated->hydrate($timeline[$i]);
                 $adapter->disconnect();
                 return $userHidrated->extract();
@@ -98,7 +101,54 @@ class Users
     			/**
     			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
     			 */
-    			$timeline = $adapter->insert(array('idTimeline'=> $this->id));   			
+    			$timeline = $adapter->insert(array('idTimeline'=> $this->id));
+    			/**
+    			 * TODO Falta el idTag con el Title del Media
+    			 */
+    			$adapter->disconnect();
+    			return $timeline;
+    	}
+    }
+    
+    /**
+     * @param none, use before setId()
+     * @return unknown
+     */
+    public function deleteTimeline()
+    {
+    	switch($this->adapterName){
+    		case'\Core\Adapters\Mysql':
+    			$adapter = new $this->adapterName();
+    			$adapter->setTable("timeline");
+    			/**
+    			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
+    			*/
+    			$timeline = $adapter->delete(array('idTimeline'=> $this->id));
+    			/**
+    			 * TODO Falta el idTag con el Title del Media
+    			 */
+    			$adapter->disconnect();
+    			return $timeline;
+    	}
+    }
+    
+	/**
+	 * @param use before setId()
+     * @param array $data
+     */
+    public function updateTimeline($data)
+    {
+    	switch($this->adapterName){
+    		case'\Core\Adapters\Mysql':
+    			$adapter = new $this->adapterName();
+    			$adapter->setTable("timeline");
+    			/**
+    			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
+    			 */
+    			$timeline = $adapter->update(array('idTimeline'=> $this->id),$data);
+    			/**
+    			 * TODO Falta el idTag con el Title del Media
+    			 */
     			$adapter->disconnect();
     			return $timeline;
     	}

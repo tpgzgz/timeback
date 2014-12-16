@@ -1,14 +1,13 @@
 <?php
 namespace Application\Services;
 
-
 use Application\Mappers\Timeline as TimelineMapper;
+/**
+ * TODO No me reconoce el TimelineMapper
+ */
 
 class Timeline
 {
-	/**
-	 * TODO No me reconoce el TimelineMapper
-	 */
     public function get($id=null)
     {
         if(!$id)
@@ -26,27 +25,43 @@ class Timeline
     private function getOne($id)
     {
         $mapper = new TimelineMapper();
+        $mapper->setId($id);
+        $data = $mapper->fetchTimeline();
+        return $data;
     }
     
     public function post($data)
     {
     	$mapper = new TimelineMapper();
     	//FILA 1
-        die("POST Method not implemented");
+    	$mapper->setId($id);
+        $ok = $mapper->insertTimeline($data);
+        if (!$ok)
+        	die("POST Method failure");
     }
     
-    public function patch()
+    /**
+     * @param unknown_type $id
+     * @param array $data
+     */
+    public function patch($id,$data)
     {
     	$mapper = new TimelineMapper();
         //FILA 2
-        die("PATCH Method not implemented");
+        $mapper->setId($id);
+        $ok = $mapper->updateTimeline($data);
+        if (!$ok)
+        	die("POST Method failure");
     }
         
     public function delete($id)
     {
     	$mapper = new TimelineMapper();
     	//FILA 3
-        die("DELETE Method not implemented");
+        $mapper->setId($id);
+        $ok = $mapper->deleteTimeline();
+        if (!$ok)
+        	die("POST Method failure");
     }
     
     public function options()
@@ -58,6 +73,5 @@ class Timeline
     {
         die("PUT Method not implemented");
     }
-    
     
 }
