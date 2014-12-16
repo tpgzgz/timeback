@@ -1,6 +1,11 @@
 <?php
 $config = array(
     'modules'=>array(
-        'Application'
+        //'Core',
+        'Application',
+        //'Authentication',
+        //'Timeline',
+        //'Door'
     )
 );
+

@@ -20,9 +20,12 @@ class Application
     
     public static function dispatch()
     {       
+                
         $controllerFile ='../modules/Application/src/Application/controllers/'.
                     self::$request['controller'].'.php';
-        //echo $controllerFile;      
+        //echo $controllerFile;
+
+//         include_once $controllerFile;       
         
         ob_start();
             $controllerName = "Application\\controllers\\".self::$request['controller'];
@@ -36,7 +39,6 @@ class Application
         self::twoStep($view,$controller->layout);
     }
     
-    // Se usa $view para algo?
     public static function twoStep($view, $layout)
     {
         include_once '../modules/Application/src/Application/layouts/'.
@@ -52,5 +54,6 @@ class Application
     {
         return self::$request;
     }
+
 
 }
