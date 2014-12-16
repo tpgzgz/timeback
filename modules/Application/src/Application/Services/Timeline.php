@@ -1,7 +1,7 @@
 <?php
 namespace Application\Services;
 
-use Application\Mappers\Timeline;
+use Application\Mappers\Timeline as TimelineMapper;
 
 class Timeline
 {
@@ -10,13 +10,13 @@ class Timeline
         if(!$id)
         {
             $mapper = new TimelineMapper();
-            $users = $mapper->fetchAllTimelines();
+            $data = $mapper->fetchAllTimeline();
             return $data;
         }
         else
             $this->getOne($id);
-        
-        //die("GET Method not implemented");    
+
+        die("GET Method not implemented");
     }
     
     private function getOne($id)
@@ -36,7 +36,8 @@ class Timeline
         die("PATCH Method not implemented");
     }
         
-    public function delete()
+
+    public function delete($id)
     {
         FILA 3
         die("DELETE Method not implemented");
