@@ -85,7 +85,7 @@ class Mysql implements AdapterInterface, MysqlInterface
         // Retornar el data
         $result = mysqli_query($this->link, $sql);
         //$row = mysqli_fetch_assoc($result);
-        
+        $rows=array();
         while ($row = mysqli_fetch_assoc($result))
         {
             $rows[] = $row;
