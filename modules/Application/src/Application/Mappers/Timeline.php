@@ -53,21 +53,22 @@ class Users
 
                 for($i=0; $i < sizeof($timeline); $i++)
                 {
-                    $timelineHidrated = new EntityTimeline();
-                    
-                    
+                	/**
+                	 * TODO Falta el idTag con el Title del Media
+                	 */
+                    $timelineHidrated = new EntityTimeline();                    
                     $timelineHidrated->hydrate($users[$i]);
                     array_push($usersHidrated, $userHidrated->extract());
                 }
 
                 $adapter->disconnect();
 
-                return $usersHidrated;
+                return $timelineHidrated;
             break;
             case'\Core\Adapters\Txt':
                 $adapter = new $this->adapterName();
-                $users = $adapter->fetchAll();
-                return $users;
+                $timeline = $adapter->fetchAll();
+                return $timeline;
             break;
         }
     }
@@ -75,77 +76,31 @@ class Users
     public function fetchUser()
     {
         switch($this->adapterName){
-           
             case'\Core\Adapters\Mysql':
                 $adapter = new $this->adapterName();
-                $adapter->setTable("USERS");
-                $users = $adapter->fetch(array('iduser'=> $this->id));
-                $adapter->setTable("GENDERS");
-                $genders = $adapter->fetchAll();
-                $adapter->setTable("CITIES");
-                $cities = $adapter->fetchAll();
-                $adapter->setTable("PETS");
-                $pets = $adapter->fetchAll();
-                $adapter->setTable("LANGUAGES");
-                $languages = $adapter->fetchAll();
-
-
-                for($i=0; $i < sizeof($users); $i++)
-                {
-                    $userHidrated = new EntityUser();
-                    $users[$i]['pets'] = array();
-                    $users[$i]['languages'] = array();
-                    $adapter->setTable("USERS_HAS_PETS");
-                    $userPets = $adapter->fetch(array ('users_iduser'=>$users[$i]['iduser']));
-                    $adapter->setTable("USERS_HAS_LANGUAGES");
-                    $userLanguages = $adapter->fetch(array ('users_iduser'=>$users[$i]['iduser']));
-
-                    foreach($genders as $gender)
-                    {  
-                        if($gender['idgender'] == $users[$i]['genders_idgender'])
-                        {                   
-                            $users[$i]['genders_idgender'] = $gender['gender'];
-                        }                    
-                    }
-                    foreach($cities as $city)
-                    {  
-                        if($city['idcity'] == $users[$i]['cities_idcity'])
-                        {                   
-                            $users[$i]['cities_idcity'] = $city['city'];
-                        }                    
-                    }
-                    foreach($pets as $pet)
-                    {
-                        foreach($userPets as $key => $userPet)
-                        {
-                            if($pet['idpet'] == $userPet['pets_idpet'])
-                            {   
-                                array_push($users[$i]['pets'], $pet['pet']);
-                            }
-                        }
-                    }
-
-                    foreach($languages as $language)
-                    {
-                        foreach($userLanguages as $key => $userLanguage)
-                        {
-                            if($language['idlanguage'] == $userLanguage['languages_idlanguage'])
-                            {                   
-                                array_push($users[$i]['languages'], $language['language']);
-                            }
-                        }
-                    }
-                    $userHidrated->hydrate($users[$i]);
-                }
-
+                $adapter->setTable("timeline");
+                $timeline = $adapter->fetch(array('idTimeline'=> $this->id));
+                $userHidrated->hydrate($timeline[$i]);
                 $adapter->disconnect();
-
                 return $userHidrated->extract();
         }
     }
     
-    public function insertUser()
+    /**
+     * @param array $data
+     */
+    public function insertUser($data)
     {
-        
+    	switch($this->adapterName){
+    		case'\Core\Adapters\Mysql':
+    			$adapter = new $this->adapterName();
+    			$adapter->setTable("timeline");
+    			/**
+    			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
+    			 */
+    			$timeline = $adapter->insert(array('idTimeline'=> $this->id));   			
+    			$adapter->disconnect();
+    			return $timeline;
+    	}
     }
 }
