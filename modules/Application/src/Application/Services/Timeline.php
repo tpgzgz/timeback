@@ -1,6 +1,7 @@
 <?php
 namespace Application\Services;
 
+
 use Application\Mappers\Timeline as TimelineMapper;
 
 class Timeline
@@ -15,7 +16,7 @@ class Timeline
         }
         else
             $this->getOne($id);
-
+        
         die("GET Method not implemented");
     }
     
@@ -36,7 +37,6 @@ class Timeline
         die("PATCH Method not implemented");
     }
         
-
     public function delete($id)
     {
         FILA 3

@@ -1,6 +1,5 @@
 <?php
 namespace Application\controllers;
-
 use Application\Mappers\Users as UserMapper;
 
 use Application\Services;

@@ -42,19 +42,14 @@ class Users
             case'\Core\Adapters\Mysql':
                 
                 $adapter = new $this->adapterName();
-                
                 $adapter->setTable("USERS");
                 $users = $adapter->fetchAll();
-                
                 $adapter->setTable("GENDERS");
                 $genders = $adapter->fetchAll();
-                
                 $adapter->setTable("CITIES");
                 $cities = $adapter->fetchAll();
-                
                 $adapter->setTable("PETS");
                 $pets = $adapter->fetchAll();
-                
                 $adapter->setTable("LANGUAGES");
                 $languages = $adapter->fetchAll();
 
@@ -78,7 +73,6 @@ class Users
                             $users[$i]['genders_idgender'] = $gender['gender'];
                         }                    
                     }
-                    
                     foreach($cities as $city)
                     {  
                         if($city['idcity'] == $users[$i]['cities_idcity'])
@@ -86,7 +80,6 @@ class Users
                             $users[$i]['cities_idcity'] = $city['city'];
                         }                    
                     }
-                    
                     foreach($pets as $pet)
                     {
                         foreach($userPets as $key => $userPet)
@@ -108,7 +101,6 @@ class Users
                             }
                         }
                     }
-                    
                     $userHidrated->hydrate($users[$i]);
                     array_push($usersHidrated, $userHidrated->extract());
                 }
