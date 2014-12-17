@@ -15,7 +15,8 @@ class Timeline
         $id = \Core\Application\Application::getRequest()['id'];
         $service = new Services\Timeline();
         $data = $service->{strtolower($_SERVER['REQUEST_METHOD'])}($id);
-
+        
+        header('Content-type: application/json');
         echo json_encode($data);        
     }
     

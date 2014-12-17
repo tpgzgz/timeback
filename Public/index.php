@@ -11,7 +11,3 @@ if(isset($_SERVER['APPLICATION_ENV']))
 \Core\Application\Application::setRequest();
 \Core\Application\Application::bootstrap();
 \Core\Application\Application::dispatch();
-
-
-
-

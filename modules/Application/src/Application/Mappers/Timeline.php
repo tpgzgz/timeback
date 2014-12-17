@@ -36,57 +36,43 @@ class Timeline
      * @return array de users
      */
     public function fetchAllTimeline()
-    {
-        switch($this->adapterName){
-           
-            case'\Core\Adapters\Mysql':
-                
-                $adapter = new $this->adapterName();
-                
-                $adapter->setTable("timeline");
-                $timeline = $adapter->fetchAll();
-                
-                $adapter->setTable("tag");
-                $tag = $adapter->fetchAll();
-                
-                $timelineHidrateds = array();
+    {                
+        $adapter = new $this->adapterName();
+        
+        $adapter->setTable("timeline");
+        $timeline = $adapter->fetchAll();
+        
+        $adapter->setTable("tag");
+        $tag = $adapter->fetchAll();
+        
+        $timelineHidrateds = array();
 
-                for($i=0; $i < sizeof($timeline); $i++)
-                {
-                	/**
-                	 * TODO Falta el idTag con el Title del Media
-                	 */
-                    $timelineHidrated = new EntityTimeline();                    
-                    $timelineHidrated->hydrate($timeline[$i]);
-                    array_push($timelineHidrateds, $timelineHidrated->extract());
-                }
-
-                $adapter->disconnect();
-
-                return $timelineHidrateds;
-            break;
-            case'\Core\Adapters\Txt':
-                $adapter = new $this->adapterName();
-                $timeline = $adapter->fetchAll();
-                return $timeline;
-            break;
+        for($i=0; $i < sizeof($timeline); $i++)
+        {
+        	/**
+        	 * TODO Falta el idTag con el Title del Media
+        	 */
+            $timelineHidrated = new EntityTimeline();                    
+            $timelineHidrated->hydrate($timeline[$i]);
+            array_push($timelineHidrateds, $timelineHidrated->extract());
         }
+
+        $adapter->disconnect();
+
+        return $timelineHidrateds;            
     }
     
     public function fetchTimeline()
     {
-        switch($this->adapterName){
-            case'\Core\Adapters\Mysql':
-                $adapter = new $this->adapterName();
-                $adapter->setTable("timeline");
-                $timeline = $adapter->fetch(array('idTimeline'=> $this->id));
-                /**
-                 * TODO Falta el idTag con el Title del Media
-                 */
-                $userHidrated->hydrate($timeline[$i]);
-                $adapter->disconnect();
-                return $userHidrated->extract();
-        }
+        $adapter = new $this->adapterName();
+        $adapter->setTable("timeline");
+        $timeline = $adapter->fetch(array('idTimeline'=> $this->id));
+        /**
+         * TODO Falta el idTag con el Title del Media
+         */
+        $userHidrated->hydrate($timeline[$i]);
+        $adapter->disconnect();
+        return $userHidrated->extract();
     }
     
     /**
@@ -94,20 +80,17 @@ class Timeline
      */
     public function insertTimeline($data)
     {
-    	switch($this->adapterName){
-    		case'\Core\Adapters\Mysql':
-    			$adapter = new $this->adapterName();
-    			$adapter->setTable("timeline");
-    			/**
-    			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
-    			 */
-    			$timeline = $adapter->insert(array('idTimeline'=> $this->id));
-    			/**
-    			 * TODO Falta el idTag con el Title del Media
-    			 */
-    			$adapter->disconnect();
-    			return $timeline;
-    	}
+		$adapter = new $this->adapterName();
+		$adapter->setTable("timeline");
+		/**
+		 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
+		 */
+		$timeline = $adapter->insert(array('idTimeline'=> $this->id));
+		/**
+		 * TODO Falta el idTag con el Title del Media
+		 */
+		$adapter->disconnect();
+		return $timeline;
     }
     
     /**
@@ -116,20 +99,17 @@ class Timeline
      */
     public function deleteTimeline()
     {
-    	switch($this->adapterName){
-    		case'\Core\Adapters\Mysql':
-    			$adapter = new $this->adapterName();
-    			$adapter->setTable("timeline");
-    			/**
-    			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
-    			*/
-    			$timeline = $adapter->delete(array('idTimeline'=> $this->id));
-    			/**
-    			 * TODO Falta el idTag con el Title del Media
-    			 */
-    			$adapter->disconnect();
-    			return $timeline;
-    	}
+		$adapter = new $this->adapterName();
+		$adapter->setTable("timeline");
+		/**
+		 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
+		*/
+		$timeline = $adapter->delete(array('idTimeline'=> $this->id));
+		/**
+		 * TODO Falta el idTag con el Title del Media
+		 */
+		$adapter->disconnect();
+		return $timeline;
     }
     
 	/**
@@ -138,19 +118,16 @@ class Timeline
      */
     public function updateTimeline($data)
     {
-    	switch($this->adapterName){
-    		case'\Core\Adapters\Mysql':
-    			$adapter = new $this->adapterName();
-    			$adapter->setTable("timeline");
-    			/**
-    			 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
-    			 */
-    			$timeline = $adapter->update(array('idTimeline'=> $this->id),$data);
-    			/**
-    			 * TODO Falta el idTag con el Title del Media
-    			 */
-    			$adapter->disconnect();
-    			return $timeline;
-    	}
+		$adapter = new $this->adapterName();
+		$adapter->setTable("timeline");
+		/**
+		 * TODO Relacion entre el nombre de las variables de la entity y el de la tabla
+		 */
+		$timeline = $adapter->update(array('idTimeline'=> $this->id),$data);
+		/**
+		 * TODO Falta el idTag con el Title del Media
+		 */
+		$adapter->disconnect();
+		return $timeline;
     }
 }
