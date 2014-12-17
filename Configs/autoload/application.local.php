@@ -2,13 +2,13 @@
 // Local identities configuration settings on $config variable
 $config = array(
 	'database'=>array(
-        'user'=>'php',
+        'user'=>'root',
         'password'=>'1234',
-	    'database'=>'usuarios'
+	    'database'=>'timeline'
     ),
     'repository'=>'db',
     'adapter'=>'\Core\Adapters\Mysql',
     'filename'=> 'usuarios.txt',
-    'default_controller'=>'index',
+    'default_controller'=>'Users',
     'default_action'=>'index'
 );

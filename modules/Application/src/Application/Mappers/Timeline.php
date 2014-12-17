@@ -4,7 +4,7 @@ namespace Application\Mappers;
 use Core\Application\Application;
 use Application\Models\EntityTimeline;
 
-class Users
+class Timeline
 {
     private $adapterName;
     private $id;
@@ -49,7 +49,7 @@ class Users
                 $adapter->setTable("tag");
                 $tag = $adapter->fetchAll();
                 
-                $timelineHidrated = array();
+                $timelineHidrateds = array();
 
                 for($i=0; $i < sizeof($timeline); $i++)
                 {
@@ -57,13 +57,13 @@ class Users
                 	 * TODO Falta el idTag con el Title del Media
                 	 */
                     $timelineHidrated = new EntityTimeline();                    
-                    $timelineHidrated->hydrate($users[$i]);
-                    array_push($usersHidrated, $userHidrated->extract());
+                    $timelineHidrated->hydrate($timeline[$i]);
+                    array_push($timelineHidrateds, $timelineHidrated->extract());
                 }
 
                 $adapter->disconnect();
 
-                return $timelineHidrated;
+                return $timelineHidrateds;
             break;
             case'\Core\Adapters\Txt':
                 $adapter = new $this->adapterName();

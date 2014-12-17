@@ -42,23 +42,19 @@ class Users
             case'\Core\Adapters\Mysql':
                 
                 $adapter = new $this->adapterName();
-                
                 $adapter->setTable("USERS");
                 $users = $adapter->fetchAll();
-                
                 $adapter->setTable("GENDERS");
                 $genders = $adapter->fetchAll();
-                
                 $adapter->setTable("CITIES");
                 $cities = $adapter->fetchAll();
-                
                 $adapter->setTable("PETS");
                 $pets = $adapter->fetchAll();
-                
                 $adapter->setTable("LANGUAGES");
                 $languages = $adapter->fetchAll();
 
                 $usersHidrated = array();
+
 
                 for($i=0; $i < sizeof($users); $i++)
                 {
@@ -121,14 +117,14 @@ class Users
         }
     }
     
-    public function fetchUser()
+    public function fetchUser($id)
     {
         switch($this->adapterName){
            
             case'\Core\Adapters\Mysql':
                 $adapter = new $this->adapterName();
                 $adapter->setTable("USERS");
-                $users = $adapter->fetch(array('iduser'=> $this->id));
+                $users = $adapter->fetch(array('iduser'=> $id));
                 $adapter->setTable("GENDERS");
                 $genders = $adapter->fetchAll();
                 $adapter->setTable("CITIES");
@@ -184,6 +180,8 @@ class Users
                             }
                         }
                     }
+                    
+                    
                     $userHidrated->hydrate($users[$i]);
                 }
 
@@ -197,4 +195,19 @@ class Users
     {
         
     }
+    public function updateUser()
+    {
+        
+    }
+    
+    public function deleteUser($id)
+    {
+        $adapter = new $this->adapterName();
+        if(method_exists($adapter, 'setTable'))
+        {
+            $adapter->setTable('users');
+        }
+        return $adapter->delete($id);
+    }
 }
+
