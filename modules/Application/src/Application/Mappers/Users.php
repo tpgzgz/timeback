@@ -42,19 +42,23 @@ class Users
             case'\Core\Adapters\Mysql':
                 
                 $adapter = new $this->adapterName();
+                
                 $adapter->setTable("USERS");
                 $users = $adapter->fetchAll();
+                
                 $adapter->setTable("GENDERS");
                 $genders = $adapter->fetchAll();
+                
                 $adapter->setTable("CITIES");
                 $cities = $adapter->fetchAll();
+                
                 $adapter->setTable("PETS");
                 $pets = $adapter->fetchAll();
+                
                 $adapter->setTable("LANGUAGES");
                 $languages = $adapter->fetchAll();
 
                 $usersHidrated = array();
-
 
                 for($i=0; $i < sizeof($users); $i++)
                 {
@@ -194,4 +198,3 @@ class Users
         
     }
 }
-
